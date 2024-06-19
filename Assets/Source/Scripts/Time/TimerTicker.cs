@@ -16,7 +16,7 @@ public class TimerTicker : IInitializable
         _signalBus = signalBus;
         _coroutineStarter = coroutineStarter;
 
-        _waitForSeconds = new WaitForSeconds(1);
+        _waitForSeconds = new WaitForSeconds(AppConstants.OneSecond);
     }
 
     public void Initialize()
@@ -29,7 +29,7 @@ public class TimerTicker : IInitializable
         while (true)
         {
             yield return _waitForSeconds;
-            _timeModel.ChangeTime(_timeModel.Time.AddSeconds(1));
+            _timeModel.ChangeTime(_timeModel.Time.AddSeconds(AppConstants.OneSecond));
             _signalBus.Fire(new TimeChanged(_timeModel.Time));
         }
     }

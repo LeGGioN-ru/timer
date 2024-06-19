@@ -64,9 +64,9 @@ public class TimeChangeButton : MonoBehaviour
             int.TryParse(timeParts[0], out int hour) &&
             int.TryParse(timeParts[1], out int minute) &&
             int.TryParse(timeParts[2], out int second) &&
-            hour >= 0 && hour < 24 &&
-            minute >= 0 && minute < 60 &&
-            second >= 0 && second < 60)
+            hour >= 0 && hour < AppConstants.HoursInDay &&
+            minute >= 0 && minute < AppConstants.MinutesInHour &&
+            second >= 0 && second < AppConstants.SecondsInMinute)
         {
             DateTime newTime = new DateTime(_timeModel.Time.Year, _timeModel.Time.Month, _timeModel.Time.Day, hour, minute, second);
             _timeModel.ChangeTime(newTime);

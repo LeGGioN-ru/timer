@@ -39,21 +39,20 @@ public class ClockView : MonoBehaviour
 
     public void UpdateClock(TimeChanged timeChangedEvent)
     {
-        float hoursInClock = 12f;
-
         DateTime time = timeChangedEvent.Time;
-        float hour = time.Hour % hoursInClock + time.Minute / 60f;
-        float minute = time.Minute + time.Second / 60f;
-        float second = time.Second + time.Millisecond / 1000f;
+        float hour = time.Hour % AppConstants.HalfHoursInDay + time.Minute / AppConstants.MinutesInHour;
+        float minute = time.Minute + time.Second / AppConstants.SecondsInMinute;
+        float second = time.Second + time.Millisecond / AppConstants.MillisecondsInSecond;
 
         float fullCircleDegree = 360f;
-        float degreeHour = fullCircleDegree / hoursInClock;
-        float degreeMinute = fullCircleDegree / 60;
+        float degreeHour = fullCircleDegree / AppConstants.HalfHoursInDay;
+        float degreeMinute = fullCircleDegree / AppConstants.MinutesInHour;
         float degreeSecond = degreeMinute;
 
-        float hourAngle = 90 - hour * degreeHour; 
-        float minuteAngle = 90 - minute * degreeMinute;
-        float secondAngle = 90 - second * degreeSecond;
+        float startAngle = 90;
+        float hourAngle = startAngle - hour * degreeHour; 
+        float minuteAngle = startAngle - minute * degreeMinute;
+        float secondAngle = startAngle - second * degreeSecond;
 
         float currentHourAngle = _hourHand.localRotation.eulerAngles.z;
         float currentMinuteAngle = _minuteHand.localRotation.eulerAngles.z;
